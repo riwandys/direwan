@@ -1,0 +1,19 @@
+{
+  "name": "direwan",
+  "version": "1.0.0",
+  "description": "Media sosial untuk Mahasiswa Informatika",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riwandys/direwan.git"
+  },
+  "author": "Riwandy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/riwandys/direwan/issues"
+  },
+  "homepage": "https://github.com/riwandys/direwan#readme"
+}
