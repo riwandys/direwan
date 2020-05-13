@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://riwandy16:riwandy@direwan-lufpn.mongodb.net/test?retryWrites=true&w=majority"
+    "mongoURI": "mongodb://riwandy16:direwan123@direwan-shard-00-00-lufpn.mongodb.net:27017,direwan-shard-00-01-lufpn.mongodb.net:27017,direwan-shard-00-02-lufpn.mongodb.net:27017/test?ssl=true&replicaSet=Direwan-shard-0&authSource=admin&retryWrites=true&w=majority"
+
 }
