@@ -1,5 +1,7 @@
 {
     "mongoURI": "mongodb://riwandy16:direwan123@direwan-shard-00-00-lufpn.mongodb.net:27017,direwan-shard-00-01-lufpn.mongodb.net:27017,direwan-shard-00-02-lufpn.mongodb.net:27017/test?ssl=true&replicaSet=Direwan-shard-0&authSource=admin&retryWrites=true&w=majority",
-    "jwtSecret": "secrettoken"
+    "jwtSecret": "secrettoken",
+    "githubClientId" : "1135709483ffe5ba9d4a",
+    "githubSecret" : "1699c8d59be32aa5c43a3c46f6df445cae01d6af"
 
 }
