@@ -1,24 +1,44 @@
 import React, { Fragment, useState } from 'react';
+import axios from 'axios';
 
 export const Register = () => {
   const [formData, setFormData] = useState({
     name: '',
+    nim: '',
     email: '',
     password: '',
     password2: '',
   });
 
-  const { name, email, password, password2 } = formData;
+  const { name, nim, email, password, password2 } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
       console.log('Password do not match');
     } else {
-      console.log(formData);
+      const newUser = {
+        name,
+        nim,
+        email,
+        password,
+      };
+      try {
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+
+        const body = JSON.stringify(newUser);
+        const res = await axios.post('/api/user', body, config);
+        console.log(res.data);
+      } catch (err) {
+        console.error(err.response.data);
+      }
     }
   };
 
@@ -35,6 +55,16 @@ export const Register = () => {
             placeholder='Name'
             name='name'
             value={name}
+            onChange={(e) => onChange(e)}
+            required
+          />
+        </div>
+        <div className='form-group'>
+          <input
+            type='text'
+            placeholder='NIM'
+            name='nim'
+            value={nim}
             onChange={(e) => onChange(e)}
             required
           />
