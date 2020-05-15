@@ -181,4 +181,67 @@ router.get("/github/:username", (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+// @route   PUT api/profile/follow/:id
+// @desc    Follow someone profile
+// @access  Private
+router.put("/follow/:id", auth, async (req, res) => {
+  try {
+    const users = await Profile.findById(req.params.id);
+    // const user2 = await Profile.findById(req.Profile.id);
+
+    // check if the profile has already been follow by spesific user
+    if (
+      users.friends.filter((like) => like.user.toString() === req.user.id)
+        .length > 0
+    ) {
+      return res.status(400).json({ msg: "You alerady follow this guy" });
+    }
+
+    users.friends.unshift({ user: req.user.id });
+    // user2.friends.unshift({ user: req.params.id });
+    await users.save();
+    // await user2.save();
+
+    res.json(users.friends);
+  } catch (err) {
+    console.error(err.message);
+    if (err.name == "CastError") {
+      return res.status(404).json({ msg: "User not Found" });
+    }
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   PUT api/posts/unfollow/:id
+// @desc    unfollow a profiles
+// @access  Private
+router.put("/unfollow/:id", auth, async (req, res) => {
+  try {
+    const users = await Profile.findById(req.params.id);
+
+    // check if the post has already been like by spesific user
+    if (
+      users.friends.filter((like) => like.user.toString() === req.user.id)
+        .length === 0
+    ) {
+      return res.status(400).json({ msg: "You not follow this guy" });
+    }
+
+    // get remove index like
+    const removeIndex = users.friends
+      .map((like) => like.user.toString())
+      .indexOf(req.user.id);
+    users.friends.splice(removeIndex, 1);
+    await users.save();
+
+    res.json(users.friends);
+  } catch (err) {
+    console.error(err.message);
+    if (err.name == "CastError") {
+      return res.status(404).json({ msg: "User not Found" });
+    }
+    res.status(500).send("Server Error");
+  }
+});
 module.exports = router;
