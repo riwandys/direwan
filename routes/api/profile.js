@@ -228,7 +228,8 @@ router.put("/unfollow/:id", auth, async (req, res) => {
       return res.status(400).json({ msg: "You not follow this guy" });
     }
 
-    // get remove index like
+    
+    // get remove index Friends
     const removeIndex = users.friends
       .map((like) => like.user.toString())
       .indexOf(req.user.id);
