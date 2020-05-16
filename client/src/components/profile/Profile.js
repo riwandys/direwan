@@ -4,7 +4,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Spinner from "../layout/Spinner";
 import { getProfileById } from "../../actions/profile";
-import profile from "../../reducers/profile";
+import ProfileTop from "./ProfileTop";
+import ProfileAbout from "./profileabout";
+import ProfileGithub from "./ProfileGithub";
 
 const Profile = ({
   getProfileById,
@@ -14,7 +16,7 @@ const Profile = ({
 }) => {
   useEffect(() => {
     getProfileById(match.params.id);
-  }, [getProfileById]);
+  }, [getProfileById, match.params.id]);
   return (
     <Fragment>
       {profile === null || loading ? (
@@ -24,10 +26,20 @@ const Profile = ({
           <Link to="/profiles" className="btn btn-white">
             Back To Peoples
           </Link>
-          {auth.isAuthenticated && auth.loading === false && auth.user._id === profile.user._id
-          && (<Link to="/edit-profile" className="btn btn-dark">
-              Edit Profile
-          </Link>)}
+          {auth.isAuthenticated &&
+            auth.loading === false &&
+            auth.user._id === profile.user._id && (
+              <Link to="/edit-profile" className="btn btn-dark">
+                Edit Profile
+              </Link>
+            )}
+          <div class="profile-grid my-1">
+            <ProfileTop profile={profile} />
+            <ProfileAbout profile={profile} />
+            {profile.githubusername && (
+                <ProfileGithub username={profile.githubusername} />
+            )}
+          </div>
         </Fragment>
       )}
     </Fragment>
