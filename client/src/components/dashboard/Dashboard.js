@@ -2,7 +2,8 @@ import React, { useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Spinner from '../layout/Spinner'
+import Spinner from '../layout/Spinner';
+import DashboardActions from './DashboardActions';
 import { getCurrentProfile } from '../../actions/profile';
 
 const Dashboard = ({getCurrentProfile, auth : { user }, profile : { profile, loading }}) => {
@@ -14,7 +15,9 @@ const Dashboard = ({getCurrentProfile, auth : { user }, profile : { profile, loa
         <h1 className="large text-primary">Dashboard</h1>
         <p className="lead">Selamat datang { user && user.name } </p>
         {profile !== null ? (
-            <Fragment>has</Fragment>
+            <Fragment>
+                <DashboardActions/>
+            </Fragment>
         ) : (
             <Fragment>
                 <p>Anda belum melengkapi profile</p>
