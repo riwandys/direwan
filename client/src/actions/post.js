@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setAlert } from '.alert';
+import { setAlert } from './alert';
 import { GET_POSTS, POST_ERROR } from './types';
 
 export const getPosts = () => async (dispatch) => {
@@ -12,7 +12,7 @@ export const getPosts = () => async (dispatch) => {
     });
   } catch (err) {
     dispatch({
-      type: PROFILE_ERROR,
+      type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
