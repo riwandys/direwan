@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { GET_PROFILE, PROFILE_ERROR } from './types';
+import { GET_PROFILE, PROFILE_ERROR, DELETE_ACCOUNT, CLEAR_PROFILE } from './types';
 
 export const getCurrentProfile = () => async dispatch => {
     try {
@@ -49,4 +49,23 @@ export const createProfile = (formData, history, edit =false) => async dispatch 
             payload: { msg: err.response.statusText, status: err.response.status }
         });
     }
+};
+
+//DELETE PROFILE
+export const deleteAccount = () => async dispatch =>{
+    if(window.confirm('Are you Sure? This can Not be Undo')){
+        try {
+            const res = await axios.delete('/api/profile');
+
+            dispatch({ type: CLEAR_PROFILE });
+            dispatch({ type: DELETE_ACCOUNT });
+            dispatch(setAlert('Account has been Removed'));
+        } catch (err) {
+            dispatch({
+                type: PROFILE_ERROR,
+                payload: {msg: err.response.statusText, status: err.response.status}
+            });
+        }
+    }
+   
 }
