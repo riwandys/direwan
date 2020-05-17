@@ -1,9 +1,10 @@
-import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, GET_PROFILES, GET_REPOS } from "../actions/types";
+import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, GET_PROFILES, GET_REPOS, UPDATE_FRIEND } from "../actions/types";
 
 const initialState = {
     profile : null,
     profiles: [],
     repos: [],
+    friends: [],
     loading: true,
     error: {}
 };
@@ -44,6 +45,12 @@ export default function(state = initialState, action){
                 repos: payload,
                 loading: false
             };
+        case UPDATE_FRIEND:
+            return{
+                ...state,
+                profile: payload,
+                loading: false
+            }
         default:
             return state;
     }

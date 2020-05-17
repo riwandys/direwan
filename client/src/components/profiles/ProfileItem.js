@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import getFollow from "../../actions/profile";
 
 const ProfileItem = ({
+  getFollow,
   profile: {
     user: { _id, name, avatar },
     status,
@@ -19,15 +21,17 @@ const ProfileItem = ({
         <p>{status}</p>
         <p className="my-1">{location && <span>{location}</span>}</p>
         <Link to={`/profile/${_id}`} className="btn btn-primary">
-            View Profile
+          View Profile
         </Link>
+        
       </div>
       <ul>
-          {skills.slice(0,4 ).map((skill, index) => (
-              <li key={index} className="text-primary">
-                  <i class="material-icons">done</i>{skill}
-              </li>
-          ))}
+        {skills.slice(0, 4).map((skill, index) => (
+          <li key={index} className="text-primary">
+            <i class="material-icons">done</i>
+            {skill}
+          </li>
+        ))}
       </ul>
     </div>
   );
@@ -35,6 +39,7 @@ const ProfileItem = ({
 
 ProfileItem.propTypes = {
   profile: PropTypes.object.isRequired,
+  getFollow: PropTypes.func.isRequired,
 };
 
 export default ProfileItem;

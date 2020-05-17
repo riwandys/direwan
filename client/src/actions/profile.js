@@ -6,7 +6,8 @@ import {
   PROFILE_ERROR,
   DELETE_ACCOUNT,
   CLEAR_PROFILE,
-  GET_REPOS
+  GET_REPOS,
+  UPDATE_FRIEND
 } from "./types";
 
 export const getCurrentProfile = () => async (dispatch) => {
@@ -131,3 +132,38 @@ export const deleteAccount = () => async (dispatch) => {
     }
   }
 };
+
+//Follow profiles
+export const getFollow = id => async (dispatch) => {
+  
+    try {
+      const res = await axios.put(`/api/profile/follow/${id}`);
+      dispatch({
+        type: UPDATE_FRIEND,
+        payload: { id, friends: res.data }
+      });
+    } catch (err) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status }
+      });
+    }
+  };
+  
+  //unFollow profiles
+export const removeFollow = id => async (dispatch) => {
+    dispatch({ type: CLEAR_PROFILE });
+    try {
+      const res = await axios.put(`/api/profile/unfollow/${id}`);
+      dispatch({
+        type: UPDATE_FRIEND,
+        payload: { id, friends: res.data }
+      });
+    } catch (err) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status },
+      });
+    }
+  };
+  
