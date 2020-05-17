@@ -32,9 +32,6 @@ export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <Link to='/profiles'>People</Link>
       </li>
       <li>
-        <a href='#!'> Developers </a>
-      </li>
-      <li>
         <Link to='/register'> Register </Link>
       </li>
       <li>
@@ -47,7 +44,7 @@ export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <nav className='navbar bg-dark'>
       <h1>
         <Link to='/'>
-          <i className='fas fa-code'> </i> DevConnector
+          <i className='fas fa-code'> </i> DiReWan
         </Link>
       </h1>
       {!loading && (
